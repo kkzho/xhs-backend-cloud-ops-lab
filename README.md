@@ -65,7 +65,8 @@ python tools/run_all_labs.py
 ├── tools/
 │   ├── build_notebooks.py          # 由案例规格生成 12 个 Notebook
 │   └── run_all_labs.py             # 批量执行与结果汇总
-└── requirements.txt
+├── requirements.txt
+└── LICENSE
 ```
 
 ## 四、案例总览
