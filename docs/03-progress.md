@@ -68,8 +68,9 @@
 | 故障注入 | 12/12 可复现 |
 | 自动化脚本 `--apply` | 12/12 返回 `RESULT: REMEDIATED` |
 | Notebook 全量执行 | 12/12 PASS（`python tools/run_all_labs.py`） |
+| 全新克隆验证 | `git clone` 后可直接执行 Notebook |
+| 文档链接 | 0 个失效相对链接（README / docs 全量扫描） |
 | 分类完整性 | 6 大类覆盖计算/网络/存储/数据/应用/可观测性 |
-| 文档链接 | README、知识库、案例、Notebook 双向可达 |
 
 复现命令：
 
