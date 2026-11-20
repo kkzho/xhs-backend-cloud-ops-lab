@@ -1014,7 +1014,9 @@ class Lab:
     def check(self, name: str, ok: bool, detail: str = "") -> bool:
         mark = "✅" if ok else "❌"
         print(f"{mark} {name}" + (f" — {detail}" if detail else ""))
-        return ok
+        if not ok:
+            raise AssertionError(f"检查未通过: {name}" + (f" ({detail})" if detail else ""))
+        return True
 
     def summary(self) -> None:
         print(f"[lab] case={self.case_id} runtime={self.dir}")

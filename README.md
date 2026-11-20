@@ -62,7 +62,9 @@ python tools/run_all_labs.py
 │   │   └── sims/                   # 真实进程：应用、SLB、MySQL-lite、Redis-lite、日志 Agent
 │   └── case-xx-*/lab.ipynb         # 每个案例一个 Notebook（异常重现→指引→操作→验证）
 ├── automation/                     # 复盘沉淀的自动化脚本（可单独运行）
-├── tools/run_all_labs.py           # 批量执行与结果汇总
+├── tools/
+│   ├── build_notebooks.py          # 由案例规格生成 12 个 Notebook
+│   └── run_all_labs.py             # 批量执行与结果汇总
 └── requirements.txt
 ```
 
@@ -100,9 +102,26 @@ python tools/run_all_labs.py
 | FD 泄漏 | 子进程 `RLIMIT_NOFILE=256`，请求内泄漏句柄 | 真实触发 `Errno 24` |
 | 云产品数据 | `state.json` 渲染 OpenAPI 响应 | 字段与阿里云一致，`"Mock": true` |
 
-> 生产环境请把 Notebook 中的 `lab.sh()` / `lab.aliyun()` 替换为等价命令：`aliyun ecs ...`、`systemctl`、`journalctl`、`ss`、`lsof`。每份 Notebook 末尾都附有命令对照表。
+> 生产环境请把 Notebook 中的 `lab.sh()` / `lab.aliyun()` 替换为等价命令：`aliyun ecs ...`、`systemctl`、`journalctl`、`ss`、`lsof`。每份案例手册（`docs/02-cases`）的“运维中”章节给出了对应的生产命令与判断依据。
 
-## 六、能力映射（面试可讲）
+## 六、验证与交付标准
+
+```bash
+# 批量执行全部 12 个 Notebook（无头、CI 友好）
+python tools/run_all_labs.py
+
+# 只跑某个案例
+python tools/run_all_labs.py case-06
+```
+
+判定标准：
+
+- 每个 Notebook 从“异常重现”到“自动化处置”全流程无报错；
+- 每个自动化脚本 `--apply` 输出 `RESULT: REMEDIATED` 且退出码为 0；
+- 案例分类与 [知识库](docs/01-knowledge-base/README.md) 的 6 大类一一对应；
+- 阶段产出与验证记录见 [进度存档](docs/03-progress.md)。
+
+## 七、能力映射（面试可讲）
 
 - **Linux**：进程/CPU/内存/FD/文件系统排查，`ps/top/lsof/ss/df/du/find/journalctl` 组合取证；
 - **云网络**：SLB 四层/七层健康检查、后端摘除与挂载、安全组最小权限、证书生命周期；
@@ -111,6 +130,6 @@ python tools/run_all_labs.py
 - **可观测性**：云监控指标取证、告警规则收敛（阈值/持续时长/静默/分组）、日志采集断流定位；
 - **工程化**：把每次处置沉淀为可执行脚本（dry-run + apply + 校验 + 退出码），可接入巡检/CI。
 
-## 七、License
+## 八、License
 
 MIT
