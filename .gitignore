@@ -1,0 +1,15 @@
+# 实验运行时数据（每个 lab 的沙箱状态、日志、pid）
+labs/.runtime/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# 本地临时产物
+*.log.tmp

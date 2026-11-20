@@ -1,0 +1,6 @@
+# 运行 Notebook 与实验沙箱所需依赖（Python >= 3.10）
+jupyterlab>=4.0
+nbclient>=0.10
+nbformat>=5.9
+psutil>=5.9
+cryptography>=42.0
